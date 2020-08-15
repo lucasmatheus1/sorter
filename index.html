@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorter</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #fdfffc;
+        font-family: "Archivo", sans-serif;
+        color: #161925;
+        margin-bottom: 20px;
+      }
+      h1 {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        color: #c1292e;
+      }
+      #table {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      #res {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      tr {
+        border: 1px solid green;
+      }
+      td {
+        border: 0.5px solid #235789;
+        border-radius: 0.5px;
+        padding: 10px;
+      }
+      button {
+        margin: 0 auto;
+        margin-top: 20px;
+        display: block;
+        padding: 10px;
+        background-color: #235789;
+        color: #fdfffc;
+      }
+      button:hover {
+        background-color: #4476a6;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sorter</h1>
+
+    <button onclick="show()" id="button1">HIDE LIST</button>
+
+    <div id="table"></div>
+
+    <button onclick="showNames()" id="button2">SORT</button>
+
+    <div id="res"></div>
+
+    <script>
+      var table = document.createElement("table");
+      var tableRes = document.createElement("table");
+      var flag = true;
+
+      renderList();
+
+      function show() {
+        if (document.getElementById("table").style.display === "none") {
+          document.getElementById("table").style.display = "flex";
+          document.getElementById("button1").innerHTML = "HIDE LIST";
+        } else {
+          document.getElementById("table").style.display = "none";
+          document.getElementById("button1").innerHTML = "SHOW LIST";
+        }
+      }
+
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+      function toSeparate() {
+        let listPeoples = getList();
+        var happy = getRandomInt(1, 10);
+        return listPeoples[happy - 1];
+      }
+      function showNames() {
+        let tr0 = document.createElement("tr");
+
+        let th0 = document.createElement("th");
+        let th1 = document.createElement("th");
+        let th2 = document.createElement("th");
+        let th3 = document.createElement("th");
+
+        th0.innerHTML = "N°";
+        th1.innerHTML = "Nome";
+        th2.innerHTML = "Telefone";
+        th3.innerHTML = "Responsável";
+
+        tr0.appendChild(th0);
+        tr0.appendChild(th1);
+        tr0.appendChild(th2);
+        tr0.appendChild(th3);
+
+        tableRes.appendChild(tr0);
+
+        let tr1 = document.createElement("tr");
+        let values = toSeparate();
+        values.forEach((element) => {
+          let td = document.createElement("td");
+          td.innerHTML = element;
+          tr1.appendChild(td);
+        });
+        tableRes.appendChild(tr1);
+
+        document.getElementById("res").appendChild(tableRes);
+      }
+
+      function renderList() {
+        let listAux = getList();
+
+        listAux.forEach((element) => {
+          var tr = document.createElement("tr");
+
+          element.forEach((item) => {
+            let column = document.createElement("td");
+            column.innerHTML = item;
+            tr.appendChild(column);
+          });
+          table.appendChild(tr);
+        });
+
+        document.getElementById("table").appendChild(table);
+      }
+
+      function getList() {
+        var list = [
+          [1, "People", "(xx) xxxxx-xxxx", "----------"],
+          [2, "People", "(xx) xxxxx-xxxx", "----------"],
+          [3, "People", "(xx) xxxxx-xxxx", "----------"],
+          [4, "People", "(xx) xxxxx-xxxx", "----------"],
+          [5, "People", "(xx) xxxxx-xxxx", "----------"],
+          [6, "People", "(xx) xxxxx-xxxx", "----------"],
+          [7, "People", "(xx) xxxxx-xxxx", "----------"],
+          [8, "People", "(xx) xxxxx-xxxx", "----------"],
+          [9, "People", "(xx) xxxxx-xxxx", "----------"],
+          [10, "People", "(xx) xxxxx-xxxx", "----------"],
+          
+        ];
+        return list;
+      }
+    </script>
+  </body>
+</html>
